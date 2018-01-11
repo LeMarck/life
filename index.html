@@ -17,15 +17,30 @@
     </footer>
     <script src="index.js"></script>
     <script>
-        const area = document.querySelector('.game');
-        const start = document.querySelector('.button__start');
+        let cellSize = 10;
+        let isPlay = false;
 
-        const cellSize = 10;
+        if (/Android|iPhone|Mobile/gi.test(navigator.userAgent)) {
+            cellSize = 20;
+            document.body.classList.add('mobile');
+        }
+
+        const area = document.querySelector('.game');
+        const canvas = document.querySelector('.game__area');
+
+        const start = document.querySelector('.button__start');
+        const random = document.querySelector('.button__random');
+        const clear = document.querySelector('.button__clear');
+
         const x = Math.ceil(area.offsetWidth / cellSize);
         const y = Math.ceil(area.offsetHeight / cellSize);
 
-        const game = new window.Life(document.querySelector('.game__area'), { cellSize, x, y });
-        let isPlay = false;
+        const game = new window.Life(canvas, { cellSize, x, y });
+
+        canvas.addEventListener('click', _ => {
+            start.classList.remove('button__stop');
+            isPlay = false;
+        });
 
         start.addEventListener('click', _ => {
             if (isPlay) {
@@ -37,18 +52,16 @@
             }
             isPlay = !isPlay;
         });
-        document.querySelector('.button__clear')
-            .addEventListener('click', _ => {
-                game.clear();
-                start.classList.remove('button__stop');
-                isPlay = false;
+        clear.addEventListener('click', _ => {
+            game.clear();
+            start.classList.remove('button__stop');
+            isPlay = false;
         });
-        document.querySelector('.button__random')
-            .addEventListener('click', _ => {
-                const matrix = Array(y).fill(Array(x).fill(0))
-                    .map(line => line.map(() => Math.random() > 0.3 ? 0 : 1));
-                game.addFigure(0, 0, matrix);
-            });
+        random.addEventListener('click', _ => {
+            game.addFigure(
+                0, 0, Array(y).fill(Array(x).fill(0)).map(line => line.map(() => Math.random() > 0.3 ? 0 : 1))
+            );
+        });
     </script>
 </body>
 </html>
