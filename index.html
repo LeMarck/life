@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Игра «Жизнь»</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <main class="game">
+        <canvas class="game__area"></canvas>
+    </main>
+    <footer class="bar">
+        <button class="button button__random"></button>
+        <button class="button button__start"></button>
+        <button class="button button__clear"></button>
+    </footer>
+    <script src="index.js"></script>
+    <script>
+        const area = document.querySelector('.game');
+        const start = document.querySelector('.button__start');
+
+        const cellSize = 10;
+        const x = Math.ceil(area.offsetWidth / cellSize);
+        const y = Math.ceil(area.offsetHeight / cellSize);
+
+        const game = new window.Life(document.querySelector('.game__area'), { cellSize, x, y });
+        let isPlay = false;
+
+        start.addEventListener('click', _ => {
+            if (isPlay) {
+                game.stop();
+                start.classList.remove('button__stop');
+            } else {
+                game.start();
+                start.classList.add('button__stop');
+            }
+            isPlay = !isPlay;
+        });
+        document.querySelector('.button__clear')
+            .addEventListener('click', _ => {
+                game.clear();
+                start.classList.remove('button__stop');
+                isPlay = false;
+        });
+        document.querySelector('.button__random')
+            .addEventListener('click', _ => {
+                const matrix = Array(y).fill(Array(x).fill(0))
+                    .map(line => line.map(() => Math.random() > 0.3 ? 0 : 1));
+                game.addFigure(0, 0, matrix);
+            });
+    </script>
+</body>
+</html>
