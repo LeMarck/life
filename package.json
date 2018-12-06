@@ -1,6 +1,7 @@
 {
     "name": "game-life",
     "description": "Game of Life",
-    "version": "1.0.0",
+    "version": "1.1.0",
+    "author": "Evgeny Petrov",
     "private": true
 }

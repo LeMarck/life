@@ -37,22 +37,21 @@ body {
     margin-right: 16px;
     background-size: cover;
     cursor: pointer;
-    outline: none;
     background-color: #fff;
 }
 
 .button__start {
-    background-image: url("https://music.yandex.ru/i/nK7CYo2CCCGtRFa4CJOcrFLISDw.svg");
+    background-image: url(icons/play.svg);
 }
 
 .button__stop {
-    background-image: url("https://music.yandex.ru/i/GBY1K4PoQCumM6UGW-FT9aaCB5s.svg");
+    background-image: url(icons/pause.svg);
 }
 
 .button__random {
-    background-image: url("https://music.yandex.ru/i/L2lof_qEdjoY3cOkUnnFapwpGWc.svg");
+    background-image: url(icons/random.svg);
 }
 
 .button__clear {
-    background-image: url("https://music.yandex.ru/i/5l-2vZ8es6o6qFlqC4NcB0m4jeY.svg");
+    background-image: url(icons/trash.svg);
 }

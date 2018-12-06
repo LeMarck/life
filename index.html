@@ -15,53 +15,7 @@
         <button class="button button__start"></button>
         <button class="button button__clear"></button>
     </footer>
+    <script src="life.js"></script>
     <script src="index.js"></script>
-    <script>
-        let cellSize = 10;
-        let isPlay = false;
-
-        if (/Android|iPhone|Mobile/gi.test(navigator.userAgent)) {
-            cellSize = 20;
-            document.body.classList.add('mobile');
-        }
-
-        const area = document.querySelector('.game');
-        const canvas = document.querySelector('.game__area');
-
-        const start = document.querySelector('.button__start');
-        const random = document.querySelector('.button__random');
-        const clear = document.querySelector('.button__clear');
-
-        const x = Math.ceil(area.offsetWidth / cellSize);
-        const y = Math.ceil(area.offsetHeight / cellSize);
-
-        const game = new window.Life(canvas, { cellSize, x, y });
-
-        canvas.addEventListener('click', _ => {
-            start.classList.remove('button__stop');
-            isPlay = false;
-        });
-
-        start.addEventListener('click', _ => {
-            if (isPlay) {
-                game.stop();
-                start.classList.remove('button__stop');
-            } else {
-                game.start();
-                start.classList.add('button__stop');
-            }
-            isPlay = !isPlay;
-        });
-        clear.addEventListener('click', _ => {
-            game.clear();
-            start.classList.remove('button__stop');
-            isPlay = false;
-        });
-        random.addEventListener('click', _ => {
-            game.addFigure(
-                0, 0, Array(y).fill(Array(x).fill(0)).map(line => line.map(() => Math.random() > 0.3 ? 0 : 1))
-            );
-        });
-    </script>
 </body>
 </html>
